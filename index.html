@@ -2,22 +2,121 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Web Toán Lớp Em</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 16px;
+      color: #1a202c;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    h1 {
+      text-align: center;
+      color: #2b6cb0;
+    }
+    h2 {
+      color: #2d3748;
+      border-bottom: 2px solid #2b6cb0;
+      padding-bottom: 6px;
+    }
+    .khungTron {
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #cbd5e0;
+      border-radius: 8px;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    button {
+      background: #2b6cb0;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #2c5282;
+    }
+    button.nutGiai {
+      background: #38a169;
+    }
+    button.nutGiai:hover {
+      background: #2f855a;
+    }
+    ol#bangXepHang {
+      background: white;
+      border-radius: 12px;
+      padding: 16px 16px 16px 36px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    .hopDe {
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .hopDe ul {
+      padding-left: 20px;
+      margin: 8px 0;
+    }
+    .hopDe input[type="text"] {
+      width: 70%;
+      display: inline-block;
+      margin-bottom: 0;
+    }
+    .hopDe button {
+      padding: 10px 14px;
+    }
+    .soNguoiGiai {
+      color: #38a169;
+      font-weight: bold;
+      font-size: 14px;
+      margin: 6px 0;
+    }
+    .dsNguoiGiai {
+      font-size: 13px;
+      color: #718096;
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Web Toán Lớp Em</h1>
-  <h2>🏆 Bảng xếp hạng</h2>
-  <ol id="bangXepHang"></ol>
+  <div class="container">
+    <h1>Web Toán Lớp Em</h1>
 
-  <h2>Đăng đề toán mới</h2>
-  <input type="text" id="tenNguoiDang" placeholder="Tên bạn">
-  <br><br>
-  <textarea id="noiDungDe" placeholder="Nhập đề toán ở đây..." rows="3" cols="40"></textarea>
-  <br><br>
-  <button onclick="dangDe()">Đăng đề</button>
+    <h2>🏆 Bảng xếp hạng</h2>
+    <ol id="bangXepHang"></ol>
 
-  <h2>Danh sách đề toán</h2>
-  <div id="danhSachDe"></div>
+    <h2>Đăng đề toán mới</h2>
+    <div class="khungTron">
+      <input type="text" id="tenNguoiDang" placeholder="Tên bạn">
+      <textarea id="noiDungDe" placeholder="Nhập đề toán ở đây..." rows="3"></textarea>
+      <button onclick="dangDe()">Đăng đề</button>
+    </div>
+
+    <h2>Danh sách đề toán</h2>
+    <div id="danhSachDe"></div>
+  </div>
 
   <!-- Thư viện Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
@@ -68,6 +167,17 @@
       oNhap.value = "";
     }
 
+    function danhDauDaGiai(idDe) {
+      var tenNguoiGiai = prompt("Bạn tên gì?");
+
+      if (!tenNguoiGiai || tenNguoiGiai.trim() === "") {
+        return;
+      }
+
+      // Dùng tên làm "key" luôn để 1 người không đánh dấu trùng nhiều lần
+      db.ref("deToan/" + idDe + "/daGiai/" + tenNguoiGiai.trim()).set(true);
+    }
+
     function capNhatBangXepHang(danhSachDe) {
       var diem = {};
 
@@ -111,14 +221,36 @@
         var de = childSnapshot.val();
 
         var hopDe = document.createElement("div");
-        hopDe.style.border = "1px solid #ccc";
-        hopDe.style.padding = "10px";
-        hopDe.style.marginBottom = "10px";
+        hopDe.className = "hopDe";
 
         var tieuDe = document.createElement("p");
         tieuDe.innerHTML = "<b>" + de.ten + "</b>: " + de.noiDung;
         hopDe.appendChild(tieuDe);
 
+        // Phần hiển thị "đã giải được"
+        var danhSachNguoiGiai = de.daGiai ? Object.keys(de.daGiai) : [];
+
+        var soNguoiGiai = document.createElement("p");
+        soNguoiGiai.className = "soNguoiGiai";
+        soNguoiGiai.textContent = "✅ " + danhSachNguoiGiai.length + " bạn đã giải được";
+        hopDe.appendChild(soNguoiGiai);
+
+        if (danhSachNguoiGiai.length > 0) {
+          var dsTen = document.createElement("p");
+          dsTen.className = "dsNguoiGiai";
+          dsTen.textContent = danhSachNguoiGiai.join(", ");
+          hopDe.appendChild(dsTen);
+        }
+
+        var nutDaGiai = document.createElement("button");
+        nutDaGiai.className = "nutGiai";
+        nutDaGiai.textContent = "✅ Đã giải được";
+        nutDaGiai.onclick = (function(id) {
+          return function() { danhDauDaGiai(id); };
+        })(idDe);
+        hopDe.appendChild(nutDaGiai);
+
+        // Phần bình luận
         var dsBL = document.createElement("ul");
         if (de.binhLuan) {
           Object.values(de.binhLuan).forEach(function(bl) {
