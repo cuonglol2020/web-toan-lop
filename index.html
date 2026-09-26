@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Web Toán Lớp Em</title>
+</head>
+<body>
+  <h1>Web Toán Lớp Em</h1>
+  <h2>🏆 Bảng xếp hạng</h2>
+  <ol id="bangXepHang"></ol>
+
+  <h2>Đăng đề toán mới</h2>
+  <input type="text" id="tenNguoiDang" placeholder="Tên bạn">
+  <br><br>
+  <textarea id="noiDungDe" placeholder="Nhập đề toán ở đây..." rows="3" cols="40"></textarea>
+  <br><br>
+  <button onclick="dangDe()">Đăng đề</button>
+
+  <h2>Danh sách đề toán</h2>
+  <div id="danhSachDe"></div>
+
+  <!-- Thư viện Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-database-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDRkE7rqFMP1X2WYny7vn9Q-ITlRIh2PSo",
+      authDomain: "web-toan-lop.firebaseapp.com",
+      databaseURL: "https://web-toan-lop-default-rtdb.firebaseio.com",
+      projectId: "web-toan-lop",
+      storageBucket: "web-toan-lop.firebasestorage.app",
+      messagingSenderId: "359002597389",
+      appId: "1:359002597389:web:8bb1110550762a43b04d44"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    var db = firebase.database();
+
+    function dangDe() {
+      var ten = document.getElementById("tenNguoiDang").value;
+      var noiDung = document.getElementById("noiDungDe").value;
+
+      if (ten === "" || noiDung === "") {
+        alert("Bạn chưa nhập đủ tên và đề toán!");
+        return;
+      }
+
+      db.ref("deToan").push({
+        ten: ten,
+        noiDung: noiDung
+      });
+
+      document.getElementById("tenNguoiDang").value = "";
+      document.getElementById("noiDungDe").value = "";
+    }
+
+    function themBinhLuan(idDe) {
+      var oNhap = document.getElementById("binhLuan" + idDe);
+      var noiDungBL = oNhap.value;
+
+      if (noiDungBL === "") {
+        alert("Bạn chưa nhập bình luận!");
+        return;
+      }
+
+      db.ref("deToan/" + idDe + "/binhLuan").push(noiDungBL);
+      oNhap.value = "";
+    }
+
+    function capNhatBangXepHang(danhSachDe) {
+      var diem = {};
+
+      danhSachDe.forEach(function(de) {
+        if (diem[de.ten]) {
+          diem[de.ten]++;
+        } else {
+          diem[de.ten] = 1;
+        }
+      });
+
+      var mangXepHang = Object.keys(diem).map(function(ten) {
+        return { ten: ten, soDe: diem[ten] };
+      });
+
+      mangXepHang.sort(function(a, b) {
+        return b.soDe - a.soDe;
+      });
+
+      var khungBXH = document.getElementById("bangXepHang");
+      khungBXH.innerHTML = "";
+      mangXepHang.forEach(function(nguoi) {
+        var dong = document.createElement("li");
+        dong.textContent = nguoi.ten + " - " + nguoi.soDe + " đề";
+        khungBXH.appendChild(dong);
+      });
+    }
+
+    db.ref("deToan").on("value", function(snapshot) {
+      var khungHienThi = document.getElementById("danhSachDe");
+      khungHienThi.innerHTML = "";
+
+      var danhSachDe = [];
+      snapshot.forEach(function(childSnapshot) {
+        danhSachDe.push(childSnapshot.val());
+      });
+      capNhatBangXepHang(danhSachDe);
+
+      snapshot.forEach(function(childSnapshot) {
+        var idDe = childSnapshot.key;
+        var de = childSnapshot.val();
+
+        var hopDe = document.createElement("div");
+        hopDe.style.border = "1px solid #ccc";
+        hopDe.style.padding = "10px";
+        hopDe.style.marginBottom = "10px";
+
+        var tieuDe = document.createElement("p");
+        tieuDe.innerHTML = "<b>" + de.ten + "</b>: " + de.noiDung;
+        hopDe.appendChild(tieuDe);
+
+        var dsBL = document.createElement("ul");
+        if (de.binhLuan) {
+          Object.values(de.binhLuan).forEach(function(bl) {
+            var dongBL = document.createElement("li");
+            dongBL.textContent = bl;
+            dsBL.appendChild(dongBL);
+          });
+        }
+        hopDe.appendChild(dsBL);
+
+        var oNhapBL = document.createElement("input");
+        oNhapBL.type = "text";
+        oNhapBL.id = "binhLuan" + idDe;
+        oNhapBL.placeholder = "Viết bình luận...";
+        hopDe.appendChild(oNhapBL);
+
+        var nutGuiBL = document.createElement("button");
+        nutGuiBL.textContent = "Gửi";
+        nutGuiBL.onclick = (function(id) {
+          return function() { themBinhLuan(id); };
+        })(idDe);
+        hopDe.appendChild(nutGuiBL);
+
+        khungHienThi.appendChild(hopDe);
+      });
+    });
+  </script>
+</body>
+</html>
