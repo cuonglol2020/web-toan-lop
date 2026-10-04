@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Web Toán Lớp Em</title>
+
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+  <!-- ================= HEADER ================= -->
+
+  <header class="topbar">
+
+```
+<div class="logo">
+  🧮 Web Toán Lớp Em
+</div>
+
+<div class="top-actions">
+
+  <span id="streak">
+    🔥 0 ngày
+  </span>
+
+  <button
+    id="btnTheme"
+    onclick="toggleTheme()"
+    type="button">
+    🌙
+  </button>
+
+  <div id="userArea">
+    <button
+      id="btnLogin"
+      onclick="moDangNhap()"
+      type="button">
+      Đăng nhập
+    </button>
+  </div>
+
+</div>
+```
+
+  </header>
+
+  <!-- ================= MAIN ================= -->
+
+  <main class="container">
+
+```
+<!-- ================= USER ================= -->
+<section id="userPanel" class="card">
+
+  <div class="user-info">
+
+    <div id="avatarContainer"></div>
+
+    <div>
+
+      <h2 id="tenNguoiDung">
+        Học sinh
+      </h2>
+
+      <div id="levelText">
+        Lv.1
+      </div>
+
+      <div class="xp-bar">
+        <div
+          id="xpProgress"
+          class="xp-progress">
+        </div>
+      </div>
+
+      <div id="xpText">
+        0 XP
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= MENU ================= -->
+<nav class="menu">
+
+  <button
+    class="menu-btn active"
+    onclick="showSection('home')"
+    type="button">
+    🏠 Trang chủ
+  </button>
+
+  <button
+    class="menu-btn"
+    onclick="showSection('problems')"
+    type="button">
+    📚 Bài toán
+  </button>
+
+  <button
+    class="menu-btn"
+    onclick="showSection('challenge')"
+    type="button">
+    ⚔️ 1v1
+  </button>
+
+  <button
+    class="menu-btn"
+    onclick="showSection('chat')"
+    type="button">
+    💬 Chat
+  </button>
+
+  <button
+    class="menu-btn"
+    onclick="showSection('leaderboard')"
+    type="button">
+    🏆 BXH
+  </button>
+
+  <button
+    class="menu-btn"
+    onclick="showSection('history')"
+    type="button">
+    📜 Lịch sử
+  </button>
+
+</nav>
+
+
+<!-- ================= HOME ================= -->
+<section
+  id="home"
+  class="page-section">
+
+  <div class="card">
+
+    <h1>
+      🧮 Chào mừng đến Web Toán Lớp Em
+    </h1>
+
+    <p>
+      Học toán, làm bài, đấu 1v1 và tích XP!
+    </p>
+
+    <div class="home-grid">
+
+      <div class="feature-card">
+        <div class="feature-icon">📚</div>
+        <h3>Bài toán</h3>
+        <p>
+          Làm và đăng các bài toán.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">⚔️</div>
+        <h3>Đấu 1v1</h3>
+        <p>
+          Thi đấu toán với người khác.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🏆</div>
+        <h3>Bảng xếp hạng</h3>
+        <p>
+          Cạnh tranh XP với mọi người.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= PROBLEMS ================= -->
+<section
+  id="problems"
+  class="page-section"
+  style="display:none;">
+
+  <div class="card">
+
+    <h2>
+      📚 Bài toán
+    </h2>
+
+    <div class="problem-toolbar">
+
+      <select id="locLop">
+        <option value="">Tất cả lớp</option>
+        <option value="1">Lớp 1</option>
+        <option value="2">Lớp 2</option>
+        <option value="3">Lớp 3</option>
+        <option value="4">Lớp 4</option>
+        <option value="5">Lớp 5</option>
+        <option value="6">Lớp 6</option>
+        <option value="7">Lớp 7</option>
+        <option value="8">Lớp 8</option>
+        <option value="9">Lớp 9</option>
+        <option value="10">Lớp 10</option>
+        <option value="11">Lớp 11</option>
+        <option value="12">Lớp 12</option>
+      </select>
+
+      <button
+        onclick="taiDanhSachDe()"
+        type="button">
+        🔄 Tải bài
+      </button>
+
+      <button
+        onclick="moDangDe()"
+        type="button">
+        ➕ Đăng bài
+      </button>
+
+    </div>
+
+    <div id="danhSachBaiToan">
+      Đang tải...
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= CHALLENGE ================= -->
+<section
+  id="challenge"
+  class="page-section"
+  style="display:none;">
+
+  <div class="card challenge-card">
+
+    <div class="challenge-header">
+
+      <div>
+
+        <h2>
+          ⚔️ Đấu Toán 1v1
+        </h2>
+
+        <p>
+          Ai đạt 3 điểm trước sẽ chiến thắng!
+        </p>
+
+      </div>
+
+      <div id="challengeStatus">
+        ⚪ Chưa tham gia
+      </div>
+
+    </div>
+
+
+    <!-- CREATE / JOIN -->
+    <div
+      id="challengeLobby"
+      class="challenge-lobby">
+
+      <div class="challenge-actions">
+
+        <button
+          class="primary-btn"
+          onclick="createMatch()"
+          type="button">
+          ➕ Tạo phòng
+        </button>
+
+        <button
+          onclick="loadMatches()"
+          type="button">
+          🔄 Làm mới phòng
+        </button>
+
+      </div>
+
+
+      <div class="challenge-info">
+
+        <div>
+          <strong>🎯 Mục tiêu</strong>
+          <span>3 điểm</span>
+        </div>
+
+        <div>
+          <strong>⏱️ Mỗi câu</strong>
+          <span>15 giây</span>
+        </div>
+
+        <div>
+          <strong>🤖 Bot</strong>
+          <span>Sau 10 giây</span>
+        </div>
+
+      </div>
+
+
+      <h3>
+        🏠 Phòng đang chờ
+      </h3>
+
+      <div id="matchList">
+        Đang tải phòng...
+      </div>
+
+    </div>
+
+
+    <!-- MATCH -->
+    <div
+      id="challengeGame"
+      style="display:none;">
+
+      <div class="match-top">
+
+        <div class="player-box">
+
+          <div id="myAvatar"></div>
+
+          <strong id="myName">
+            Bạn
+          </strong>
+
+          <span id="myScore">
+            0
+          </span>
+
+        </div>
+
+
+        <div class="round-box">
+
+          <div>
+            Vòng
+            <span id="roundNumber">
+              1
+            </span>
+          </div>
+
+          <div
+            id="matchTimer"
+            class="match-timer">
+            15
+          </div>
+
+        </div>
+
+
+        <div class="player-box opponent">
+
+          <div id="opponentAvatar"></div>
+
+          <strong id="opponentName">
+            Đối thủ
+          </strong>
+
+          <span id="opponentScore">
+            0
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="matchStatus"
+        class="match-status">
+        ⏳ Đang chờ đối thủ...
+      </div>
+
+
+      <div class="question-card">
+
+        <div
+          id="matchQuestion"
+          class="match-question">
+          Chờ câu hỏi...
+        </div>
+
+        <div class="answer-area">
+
+          <input
+            id="matchAnswer"
+            type="number"
+            inputmode="numeric"
+            autocomplete="off"
+            placeholder="Nhập đáp án">
+
+          <button
+            onclick="submitAnswer()"
+            type="button">
+            ✅ Trả lời
+          </button>
+
+        </div>
+
+        <div
+          id="answerFeedback"
+          class="answer-feedback">
+        </div>
+
+      </div>
+
+
+      <button
+        class="danger-btn"
+        onclick="leaveMatch()"
+        type="button">
+        🚪 Rời trận
+      </button>
+
+    </div>
+
+
+    <!-- RESULT -->
+    <div
+      id="challengeResult"
+      style="display:none;">
+
+      <div class="result-card">
+
+        <div
+          id="resultIcon"
+          class="result-icon">
+          🏆
+        </div>
+
+        <h2 id="resultTitle">
+          Kết thúc trận
+        </h2>
+
+        <p id="resultText">
+          Trận đấu đã kết thúc.
+        </p>
+
+        <div class="final-score">
+
+          <span id="finalMyScore">
+            0
+          </span>
+
+          <strong>
+            -
+          </strong>
+
+          <span id="finalOpponentScore">
+            0
+          </span>
+
+        </div>
+
+        <button
+          onclick="backToChallengeLobby()"
+          type="button">
+          🔄 Đấu trận mới
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- 1V1 STATS -->
+  <div class="card">
+
+    <h2>
+      📊 Thống kê 1v1
+    </h2>
+
+    <div
+      id="challengeStats"
+      class="stats-grid">
+
+      <div class="stat-box">
+        <strong id="statTotal">
+          0
+        </strong>
+        <span>Tổng trận</span>
+      </div>
+
+      <div class="stat-box">
+        <strong id="statWins">
+          0
+        </strong>
+        <span>Thắng</span>
+      </div>
+
+      <div class="stat-box">
+        <strong id="statLosses">
+          0
+        </strong>
+        <span>Thua</span>
+      </div>
+
+      <div class="stat-box">
+        <strong id="statDraws">
+          0
+        </strong>
+        <span>Hòa</span>
+      </div>
+
+      <div class="stat-box">
+        <strong id="statWinRate">
+          0%
+        </strong>
+        <span>Tỉ lệ thắng</span>
+      </div>
+
+      <div class="stat-box">
+        <strong id="statStreak">
+          0
+        </strong>
+        <span>Chuỗi thắng</span>
+      </div>
+
+      <div class="stat-box">
+        <strong id="statQuestions">
+          0
+        </strong>
+        <span>Câu đã trả lời</span>
+      </div>
+
+      <div class="stat-box">
+        <strong id="statAccuracy">
+          0%
+        </strong>
+        <span>Độ chính xác</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= CHAT ================= -->
+<section
+  id="chat"
+  class="page-section"
+  style="display:none;">
+
+  <div class="card">
+
+    <h2>
+      💬 Chat chung
+    </h2>
+
+    <div
+      id="khungChat"
+      class="chat-box">
+      Đang tải chat...
+    </div>
+
+    <div class="chat-input">
+
+      <input
+        id="oNhapChat"
+        maxlength="300"
+        placeholder="Nhập tin nhắn...">
+
+      <button
+        onclick="guiTinNhanChat()"
+        type="button">
+        Gửi
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= LEADERBOARD ================= -->
+<section
+  id="leaderboard"
+  class="page-section"
+  style="display:none;">
+
+  <div class="card">
+
+    <h2>
+      🏆 Bảng xếp hạng XP
+    </h2>
+
+    <div id="bangXepHang">
+      Đang tải...
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= HISTORY ================= -->
+<section
+  id="history"
+  class="page-section"
+  style="display:none;">
+
+  <div class="card">
+
+    <h2>
+      📜 Lịch sử đấu 1v1
+    </h2>
+
+    <div id="lichSuDau">
+      Đang tải...
+    </div>
+
+  </div>
+
+</section>
+```
+
+  </main>
+
+  <!-- ================= LOGIN MODAL ================= -->
+
+  <div
+    id="loginModal"
+    class="modal"
+    style="display:none;">
+
+```
+<div class="modal-content">
+
+  <button
+    class="modal-close"
+    onclick="dongDangNhap()"
+    type="button">
+    ✕
+  </button>
+
+  <h2 id="loginTitle">
+    🔐 Đăng nhập
+  </h2>
+
+
+  <div
+    id="registerNameGroup"
+    style="display:none;">
+
+    <label>
+      Tên hiển thị
+    </label>
+
+    <input
+      id="registerName"
+      type="text"
+      maxlength="30"
+      placeholder="Tên của bạn">
+
+  </div>
+
+
+  <label>
+    Email
+  </label>
+
+  <input
+    id="loginEmail"
+    type="email"
+    placeholder="Email">
+
+
+  <label>
+    Mật khẩu
+  </label>
+
+  <input
+    id="loginPassword"
+    type="password"
+    placeholder="Mật khẩu">
+
+
+  <button
+    id="loginSubmitBtn"
+    class="primary-btn"
+    onclick="xuLyDangNhap()"
+    type="button">
+    Đăng nhập
+  </button>
+
+
+  <button
+    id="switchAuthBtn"
+    class="link-btn"
+    onclick="doiCheDoDangNhap()"
+    type="button">
+    Chưa có tài khoản? Đăng ký
+  </button>
+
+
+  <div
+    id="loginMessage"
+    class="form-message">
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <!-- ================= PROBLEM MODAL ================= -->
+
+  <div
+    id="problemModal"
+    class="modal"
+    style="display:none;">
+
+```
+<div class="modal-content large">
+
+  <button
+    class="modal-close"
+    onclick="dongDangDe()"
+    type="button">
+    ✕
+  </button>
+
+  <h2>
+    ➕ Đăng bài toán
+  </h2>
+
+
+  <label>
+    Lớp
+  </label>
+
+  <select id="lopBaiToan">
+
+    <option value="1">
+      Lớp 1
+    </option>
+
+    <option value="2">
+      Lớp 2
+    </option>
+
+    <option value="3">
+      Lớp 3
+    </option>
+
+    <option value="4">
+      Lớp 4
+    </option>
+
+    <option value="5">
+      Lớp 5
+    </option>
+
+    <option value="6">
+      Lớp 6
+    </option>
+
+    <option value="7">
+      Lớp 7
+    </option>
+
+    <option value="8" selected>
+      Lớp 8
+    </option>
+
+    <option value="9">
+      Lớp 9
+    </option>
+
+    <option value="10">
+      Lớp 10
+    </option>
+
+    <option value="11">
+      Lớp 11
+    </option>
+
+    <option value="12">
+      Lớp 12
+    </option>
+
+  </select>
+
+
+  <label>
+    Nội dung bài toán
+  </label>
+
+  <textarea
+    id="noiDungBaiToan"
+    rows="6"
+    placeholder="Nhập đề bài..."></textarea>
+
+
+  <label>
+    Đáp án
+  </label>
+
+  <input
+    id="dapAnBaiToan"
+    type="text"
+    placeholder="Nhập đáp án">
+
+
+  <label>
+    File / hình ảnh (không bắt buộc)
+  </label>
+
+  <input
+    id="fileBaiToan"
+    type="file"
+    accept="image/*,.pdf,.doc,.docx">
+
+
+  <div
+    id="uploadProgress"
+    class="upload-progress">
+  </div>
+
+
+  <button
+    class="primary-btn"
+    onclick="dangBaiToan()"
+    type="button">
+    🚀 Đăng bài
+  </button>
+
+</div>
+```
+
+  </div>
+
+  <!-- ================= FIREBASE ================= -->
+
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-database-compat.js"></script>
+
+  <!-- ================= PROJECT JS ================= -->
+
+  <script src="./js/firebase.js"></script>
+
+  <script src="./js/main.js"></script>
+
+  <script src="./js/user.js"></script>
+
+  <script src="./js/auth.js"></script>
+
+  <script src="./js/chat.js"></script>
+
+  <script src="./js/problems.js"></script>
+
+  <script src="./js/challenge.js"></script>
+
+</body>
+</html>

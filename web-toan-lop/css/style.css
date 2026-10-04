@@ -1,0 +1,1668 @@
+/* =========================================================
+   WEB TOÁN LỚP EM - STYLE.CSS
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #f0f4f8;
+  --card: #ffffff;
+  --text: #1a202c;
+  --muted: #718096;
+
+  --primary: #3182ce;
+  --primary2: #2b6cb0;
+
+  --border: #cbd5e0;
+
+  --green: #38a169;
+  --red: #e53e3e;
+  --orange: #dd6b20;
+
+  --shadow: 0 2px 8px rgba(0, 0, 0, .08);
+  --shadow-hover: 0 5px 15px rgba(0, 0, 0, .12);
+}
+
+[data-theme="dark"] {
+  --bg: #171923;
+  --card: #2d3748;
+  --text: #edf2f7;
+  --muted: #a0aec0;
+
+  --primary: #63b3ed;
+  --primary2: #4299e1;
+
+  --border: #4a5568;
+
+  --green: #68d391;
+  --red: #fc8181;
+  --orange: #f6ad55;
+
+  --shadow: 0 2px 8px rgba(0, 0, 0, .35);
+  --shadow-hover: 0 5px 15px rgba(0, 0, 0, .5);
+}
+
+/* =========================================================
+   BODY
+   ========================================================= */
+
+body {
+  margin: 0;
+  padding: 15px;
+
+  background: var(--bg);
+  color: var(--text);
+
+  font-family: Arial, sans-serif;
+
+  transition:
+    background .2s ease,
+    color .2s ease;
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* =========================================================
+   TIÊU ĐỀ
+   ========================================================= */
+
+h1 {
+  text-align: center;
+  color: var(--primary);
+  margin: 10px 0 20px;
+}
+
+h2 {
+  margin-top: 25px;
+  margin-bottom: 12px;
+
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 6px;
+}
+
+/* =========================================================
+   CARD CHUNG
+   ========================================================= */
+
+.card,
+.bar,
+.subbar,
+.problem,
+.match {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+}
+
+/* =========================================================
+   THANH THÔNG TIN
+   ========================================================= */
+
+.bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.subbar {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+  flex-wrap: wrap;
+
+  color: var(--muted);
+}
+
+/* =========================================================
+   INPUT / TEXTAREA / SELECT
+   ========================================================= */
+
+input,
+textarea,
+select {
+  width: 100%;
+
+  padding: 10px;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  background: var(--bg);
+  color: var(--text);
+
+  font-size: 15px;
+
+  margin-bottom: 10px;
+
+  outline: none;
+
+  transition:
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--primary);
+
+  box-shadow:
+    0 0 0 2px rgba(49, 130, 206, .12);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+/* =========================================================
+   BUTTON
+   ========================================================= */
+
+button {
+  border: 0;
+  border-radius: 8px;
+
+  padding: 10px 15px;
+
+  background: var(--primary);
+  color: #fff;
+
+  cursor: pointer;
+
+  font-size: 14px;
+
+  transition:
+    background .2s ease,
+    transform .1s ease,
+    opacity .2s ease;
+}
+
+button:hover {
+  background: var(--primary2);
+}
+
+button:active {
+  transform: scale(.98);
+}
+
+button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn2 {
+  background: var(--muted);
+}
+
+.green {
+  background: var(--green);
+}
+
+.red {
+  background: var(--red);
+}
+
+.orange {
+  background: var(--orange);
+}
+
+.btnrow {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+/* =========================================================
+   TEXT
+   ========================================================= */
+
+.small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* =========================================================
+   AVATAR
+   ========================================================= */
+
+.avatar {
+  display: inline-flex;
+
+  width: 25px;
+  height: 25px;
+
+  border-radius: 50%;
+
+  color: #fff;
+
+  justify-content: center;
+  align-items: center;
+
+  font-size: 12px;
+  font-weight: bold;
+
+  vertical-align: middle;
+}
+
+/* =========================================================
+   BADGE / XP
+   ========================================================= */
+
+.badge {
+  display: inline-block;
+
+  padding: 2px 8px;
+
+  border-radius: 20px;
+
+  background: var(--primary);
+  color: #fff;
+
+  font-size: 11px;
+}
+
+.xpbar {
+  width: 180px;
+  height: 8px;
+
+  border-radius: 10px;
+
+  overflow: hidden;
+
+  background: var(--border);
+}
+
+.xpfill {
+  height: 100%;
+  width: 0;
+
+  background: var(--primary);
+
+  transition: width .3s ease;
+}
+
+/* =========================================================
+   CHAT
+   ========================================================= */
+
+.chatbox {
+  width: 100%;
+
+  height: 280px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+
+  margin-bottom: 10px;
+
+  padding: 4px;
+}
+
+.msg {
+  width: 100%;
+
+  background: var(--bg);
+
+  border-radius: 9px;
+
+  padding: 8px;
+
+  word-break: break-word;
+}
+
+.msghead {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+
+  font-size: 13px;
+}
+
+.time {
+  margin-left: auto;
+
+  color: var(--muted);
+
+  font-size: 10px;
+}
+
+.chatrow {
+  display: flex;
+
+  gap: 7px;
+
+  width: 100%;
+}
+
+.chatrow input {
+  flex: 1;
+  min-width: 0;
+
+  margin: 0;
+}
+
+.chatrow button {
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   BỘ LỌC BÀI TOÁN
+   ========================================================= */
+
+.filter {
+  display: flex;
+
+  gap: 6px;
+
+  overflow-x: auto;
+
+  padding-bottom: 10px;
+}
+
+.filter button {
+  white-space: nowrap;
+
+  background: var(--card);
+  color: var(--text);
+
+  border: 1px solid var(--border);
+}
+
+.filter button.active {
+  background: var(--primary);
+  color: #fff;
+
+  border-color: var(--primary);
+}
+
+/* =========================================================
+   BÀI TOÁN
+   ========================================================= */
+
+.problemText {
+  white-space: pre-line;
+
+  margin: 10px 0;
+
+  line-height: 1.5;
+
+  word-break: break-word;
+}
+
+.tag {
+  display: inline-block;
+
+  background: var(--primary);
+  color: #fff;
+
+  border-radius: 10px;
+
+  padding: 2px 7px;
+
+  font-size: 10px;
+
+  margin-left: 5px;
+}
+
+.comment {
+  padding: 7px 0;
+
+  border-bottom: 1px solid var(--border);
+
+  font-size: 13px;
+
+  word-break: break-word;
+}
+
+.loading {
+  text-align: center;
+
+  color: var(--muted);
+
+  padding: 15px;
+}
+
+/* =========================================================
+   ==================== PHÒNG 1V1 =========================
+   ========================================================= */
+
+/*
+   Danh sách phòng
+*/
+
+#matches {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+/*
+   TỪNG PHÒNG 1V1
+
+   Đây là phần sửa lỗi:
+   - Không còn chữ trắng bay trên nền
+   - Có nền card
+   - Có bo góc
+   - Có padding
+   - Có khoảng cách
+*/
+
+.match,
+.match-item {
+  width: 100%;
+
+  position: relative;
+
+  background: var(--card);
+  color: var(--text);
+
+  border: 1px solid var(--border);
+
+  border-radius: 12px;
+
+  padding: 15px;
+
+  margin: 0;
+
+  box-shadow: var(--shadow);
+
+  transition:
+    transform .15s ease,
+    box-shadow .15s ease,
+    border-color .15s ease;
+}
+
+.match:hover,
+.match-item:hover {
+  transform: translateY(-1px);
+
+  box-shadow: var(--shadow-hover);
+
+  border-color: var(--primary);
+}
+
+/*
+   Phần trên của phòng
+*/
+
+.matchTop {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+
+  margin-bottom: 8px;
+}
+
+/*
+   Tên phòng / người tạo
+*/
+
+.match-item strong,
+.match strong {
+  color: var(--text);
+
+  font-size: 15px;
+
+  word-break: break-word;
+}
+
+/*
+   Thông tin độ khó
+*/
+
+.match-item .small,
+.match .small {
+  color: var(--muted);
+}
+
+/*
+   Điểm phòng trong danh sách
+*/
+
+.match-item .score,
+.match .score {
+  color: var(--text);
+}
+
+/*
+   Các nút trong phòng
+*/
+
+.match-item button,
+.match button {
+  margin-top: 8px;
+}
+
+/*
+   Phòng đang chờ
+*/
+
+.match.waiting {
+  border-left: 4px solid var(--orange);
+}
+
+/*
+   Phòng đang đấu
+*/
+
+.match.playing {
+  border-left: 4px solid var(--green);
+}
+
+/*
+   Phòng rỗng
+*/
+
+.match.empty,
+#matches .empty {
+  width: 100%;
+
+  text-align: center;
+
+  color: var(--muted);
+
+  background: var(--card);
+
+  border: 1px dashed var(--border);
+
+  border-radius: 12px;
+
+  padding: 20px;
+}
+
+/* =========================================================
+   SCOREBOARD
+   ========================================================= */
+
+.scoreboard {
+  display: flex;
+
+  gap: 10px;
+
+  margin: 12px 0;
+}
+
+.score {
+  flex: 1;
+
+  text-align: center;
+
+  padding: 12px;
+
+  background: var(--bg);
+
+  color: var(--text);
+
+  border: 1px solid var(--border);
+
+  border-radius: 10px;
+}
+
+.score b {
+  display: block;
+
+  font-size: 22px;
+
+  margin-top: 4px;
+
+  color: var(--primary);
+}
+
+/* =========================================================
+   TRẬN ĐẤU HIỆN TẠI
+   ========================================================= */
+
+#currentMatch {
+  width: 100%;
+}
+
+#currentMatch .match-playing {
+  width: 100%;
+
+  background: var(--card);
+
+  border: 1px solid var(--border);
+
+  border-radius: 14px;
+
+  padding: 18px;
+
+  box-shadow: var(--shadow);
+
+  text-align: center;
+}
+
+/*
+   Trạng thái đang chờ đối thủ
+*/
+
+#currentMatch .match-waiting {
+  width: 100%;
+
+  background: var(--card);
+
+  color: var(--text);
+
+  border: 1px solid var(--border);
+
+  border-radius: 14px;
+
+  padding: 20px;
+
+  box-shadow: var(--shadow);
+
+  text-align: center;
+}
+
+/*
+   Tiêu đề trận đấu
+*/
+
+#currentMatch h3 {
+  margin-top: 0;
+
+  margin-bottom: 12px;
+
+  color: var(--primary);
+}
+
+/* =========================================================
+   CÂU HỎI
+   ========================================================= */
+
+.question {
+  text-align: center;
+
+  font-size: 32px;
+
+  font-weight: bold;
+
+  line-height: 1.3;
+
+  margin: 20px 0;
+
+  padding: 15px;
+
+  background: var(--bg);
+
+  border: 1px solid var(--border);
+
+  border-radius: 12px;
+
+  color: var(--text);
+
+  word-break: break-word;
+}
+
+/* =========================================================
+   TIMER
+   ========================================================= */
+
+.timer {
+  text-align: center;
+
+  font-size: 25px;
+
+  font-weight: bold;
+
+  color: var(--orange);
+
+  margin: 10px 0;
+}
+
+/* =========================================================
+   INPUT TRẢ LỜI 1V1
+   ========================================================= */
+
+#currentMatch input {
+  text-align: center;
+
+  font-size: 18px;
+
+  margin-bottom: 10px;
+}
+
+#currentMatch .btnrow {
+  justify-content: center;
+}
+
+/* =========================================================
+   KẾT QUẢ TRẬN ĐẤU
+
+   Sửa lỗi:
+   "🏁 Trận đấu kết thúc" bị nằm lệch/bên dưới.
+   */
+
+.match-finished {
+  width: 100%;
+
+  min-height: 180px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  background: var(--card);
+
+  color: var(--text);
+
+  border: 1px solid var(--border);
+
+  border-radius: 15px;
+
+  padding: 25px;
+
+  margin: 0 auto;
+
+  box-shadow: var(--shadow);
+}
+
+.match-finished h3 {
+  margin: 0 0 15px;
+
+  color: var(--primary);
+
+  font-size: 22px;
+}
+
+.match-finished .final-score {
+  font-size: 30px;
+
+  font-weight: bold;
+
+  margin: 10px 0;
+
+  color: var(--text);
+}
+
+.match-finished button {
+  margin-top: 15px;
+}
+
+/*
+   Nếu challenge.js dùng .result
+*/
+
+.result {
+  width: 100%;
+
+  text-align: center;
+
+  font-size: 22px;
+
+  font-weight: bold;
+
+  padding: 15px;
+
+  color: var(--text);
+}
+
+/* =========================================================
+   BOT
+   ========================================================= */
+
+.bot {
+  color: var(--orange);
+}
+
+/* =========================================================
+   LỊCH SỬ TRẬN ĐẤU
+   ========================================================= */
+
+.history {
+  display: none;
+
+  width: 100%;
+
+  margin-top: 12px;
+
+  background: var(--card);
+
+  border: 1px solid var(--border);
+
+  border-radius: 12px;
+
+  padding: 15px;
+
+  box-shadow: var(--shadow);
+}
+
+#history {
+  width: 100%;
+}
+
+.histrow {
+  width: 100%;
+
+  padding: 10px 0;
+
+  border-bottom: 1px solid var(--border);
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 10px;
+
+  color: var(--text);
+
+  word-break: break-word;
+}
+
+.histrow:last-child {
+  border-bottom: 0;
+}
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+.modalbg {
+  position: fixed;
+
+  inset: 0;
+
+  background: rgba(0, 0, 0, .65);
+
+  z-index: 9999;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 15px;
+}
+
+.modal {
+  width: 100%;
+
+  max-width: 400px;
+
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  background: var(--card);
+
+  color: var(--text);
+
+  border-radius: 15px;
+
+  padding: 20px;
+
+  box-shadow: 0 10px 35px rgba(0, 0, 0, .3);
+}
+
+.modal h2 {
+  text-align: center;
+
+  border: 0;
+
+  margin-top: 0;
+
+  margin-bottom: 18px;
+}
+
+/* =========================================================
+   AUTH ERROR
+   ========================================================= */
+
+.error {
+  min-height: 18px;
+
+  color: var(--red);
+
+  font-size: 13px;
+
+  margin-bottom: 8px;
+}
+
+/* =========================================================
+   UPLOAD
+   ========================================================= */
+
+.uploadBox {
+  display: block;
+
+  padding: 12px;
+
+  border: 1px dashed var(--border);
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  margin-bottom: 8px;
+
+  background: var(--bg);
+
+  color: var(--text);
+
+  transition:
+    border-color .2s ease,
+    background .2s ease;
+}
+
+.uploadBox:hover {
+  border-color: var(--primary);
+
+  background: var(--card);
+}
+
+.uploadBox b {
+  display: block;
+
+  margin-bottom: 3px;
+}
+
+.previewBox {
+  padding: 8px;
+
+  background: var(--bg);
+
+  border-radius: 8px;
+
+  margin-bottom: 10px;
+
+  border: 1px solid var(--border);
+
+  color: var(--text);
+}
+
+.previewImage {
+  display: block;
+
+  max-width: 220px;
+  max-height: 170px;
+
+  border-radius: 8px;
+
+  margin-top: 8px;
+
+  object-fit: contain;
+}
+
+.attachment {
+  margin-top: 10px;
+
+  padding: 10px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 10px;
+
+  background: var(--bg);
+
+  color: var(--text);
+}
+
+.problemImage {
+  display: block;
+
+  max-width: 100%;
+  max-height: 450px;
+
+  margin-top: 8px;
+
+  border-radius: 10px;
+
+  object-fit: contain;
+}
+
+.fileAttachment {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+}
+
+.fileAttachment a {
+  color: var(--primary);
+
+  font-weight: bold;
+
+  text-decoration: none;
+
+  word-break: break-word;
+}
+
+.fileAttachment a:hover {
+  text-decoration: underline;
+}
+
+.progressText {
+  min-height: 18px;
+
+  margin: 5px 0 10px;
+
+  color: var(--muted);
+
+  font-size: 13px;
+}
+
+/* =========================================================
+   THANH CUỘN
+   ========================================================= */
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  body {
+    padding: 9px;
+  }
+
+  h1 {
+    font-size: 24px;
+
+    margin-top: 8px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .card,
+  .bar,
+  .subbar,
+  .problem,
+  .match {
+    padding: 12px;
+  }
+
+  .bar {
+    align-items: flex-start;
+  }
+
+  .chatrow {
+    flex-direction: column;
+  }
+
+  .chatrow button {
+    width: 100%;
+  }
+
+  .scoreboard {
+    gap: 6px;
+  }
+
+  .score {
+    padding: 9px;
+  }
+
+  .question {
+    font-size: 27px;
+
+    padding: 12px;
+  }
+
+  .timer {
+    font-size: 23px;
+  }
+
+  .xpbar {
+    width: 140px;
+  }
+
+  .matchTop {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .match-item button,
+  .match button {
+    width: 100%;
+  }
+
+  .histrow {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .match-finished {
+    min-height: 160px;
+
+    padding: 18px;
+  }
+
+  .match-finished h3 {
+    font-size: 20px;
+  }
+
+  .match-finished .final-score {
+    font-size: 26px;
+  }
+}
+
+/* =========================================================
+   MOBILE NHỎ
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+  body {
+    padding: 6px;
+  }
+
+  button {
+    padding: 9px 11px;
+  }
+
+  .question {
+    font-size: 24px;
+  }
+
+  .score b {
+    font-size: 19px;
+  }
+
+  .xpbar {
+    width: 120px;
+  }
+}
+
+/* =========================================================
+   PHASE 1 - 1V1 UI UPGRADE
+   ========================================================= */
+
+.match-icon {
+  font-size: 42px;
+  margin-bottom: 5px;
+}
+
+.players-versus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin: 18px 0;
+}
+
+.player-box {
+  flex: 1;
+  max-width: 220px;
+
+  padding: 14px;
+
+  background: var(--bg);
+
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  text-align: center;
+}
+
+.player-box b {
+  display: block;
+
+  color: var(--text);
+
+  word-break: break-word;
+}
+
+.player-avatar {
+  display: block;
+
+  font-size: 30px;
+
+  margin-bottom: 5px;
+}
+
+.vs {
+  font-weight: bold;
+
+  color: var(--primary);
+
+  font-size: 18px;
+}
+
+.ready-match {
+  border-top: 4px solid var(--green) !important;
+}
+
+.ready-text {
+  margin: 12px 0;
+
+  color: var(--orange);
+
+  font-weight: bold;
+}
+
+.match-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-bottom: 10px;
+}
+
+.live-dot {
+  display: inline-block;
+
+  width: 9px;
+  height: 9px;
+
+  border-radius: 50%;
+
+  background: var(--red);
+
+  margin-right: 5px;
+}
+
+.difficulty-badge,
+.waiting-badge {
+  display: inline-block;
+
+  padding: 5px 9px;
+
+  border-radius: 20px;
+
+  font-size: 12px;
+}
+
+.waiting-badge {
+  background: rgba(221, 107, 32, .12);
+  color: var(--orange);
+}
+
+.difficulty-easy {
+  border-color: var(--green) !important;
+}
+
+.difficulty-medium {
+  border-color: var(--orange) !important;
+}
+
+.difficulty-hard {
+  border-color: var(--red) !important;
+}
+
+.round-info {
+  margin: 8px 0;
+
+  color: var(--muted);
+
+  font-size: 13px;
+}
+
+.playing-players {
+  margin-bottom: 5px;
+}
+
+.playing-players .player-box {
+  padding: 10px;
+}
+
+.player-label {
+  display: block;
+
+  color: var(--muted);
+
+  font-size: 10px;
+
+  font-weight: bold;
+
+  margin-bottom: 4px;
+}
+
+.big-score {
+  font-size: 32px;
+
+  font-weight: bold;
+
+  color: var(--primary);
+
+  margin-top: 4px;
+}
+
+.timer-wrap {
+  margin: 12px 0;
+}
+
+.timer-track {
+  width: 100%;
+
+  height: 7px;
+
+  overflow: hidden;
+
+  border-radius: 10px;
+
+  background: var(--border);
+}
+
+.timer-progress {
+  width: 100%;
+
+  height: 100%;
+
+  border-radius: 10px;
+
+  background: var(--primary);
+
+  transition: width 1s linear;
+}
+
+.timer-warning {
+  color: var(--orange) !important;
+}
+
+.timer-danger {
+  color: var(--red) !important;
+
+  animation: timerPulse .6s infinite alternate;
+}
+
+@keyframes timerPulse {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.08);
+  }
+}
+
+.answer-row {
+  margin-bottom: 8px;
+}
+
+.answer-button {
+  min-width: 150px;
+}
+
+.match-finished {
+  animation: matchFinish .25s ease;
+}
+
+@keyframes matchFinish {
+  from {
+    opacity: 0;
+    transform: scale(.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.result-icon {
+  font-size: 48px;
+
+  margin-bottom: 5px;
+}
+
+.match-finished.win {
+  border-top: 5px solid var(--green);
+}
+
+.match-finished.lose {
+  border-top: 5px solid var(--red);
+}
+
+.match-finished.draw {
+  border-top: 5px solid var(--orange);
+}
+
+.match-ended-text {
+  margin-top: 8px;
+}
+
+
+/* =========================================================
+   PHASE 2 - THỐNG KÊ
+   ========================================================= */
+
+#challengeStats {
+  margin-bottom: 18px;
+}
+
+.stats-title {
+  font-size: 18px;
+
+  font-weight: bold;
+
+  margin-bottom: 12px;
+
+  color: var(--primary);
+}
+
+.stats-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 8px;
+}
+
+.stat-card {
+  padding: 12px 7px;
+
+  text-align: center;
+
+  background: var(--bg);
+
+  border: 1px solid var(--border);
+
+  border-radius: 10px;
+}
+
+.stat-card span {
+  display: block;
+
+  font-size: 20px;
+
+  margin-bottom: 4px;
+}
+
+.stat-card b {
+  display: block;
+
+  font-size: 20px;
+
+  color: var(--primary);
+}
+
+.stat-card small {
+  display: block;
+
+  margin-top: 3px;
+
+  color: var(--muted);
+
+  font-size: 10px;
+}
+
+.stat-card.win-stat b {
+  color: var(--green);
+}
+
+.stat-card.lose-stat b {
+  color: var(--red);
+}
+
+.history-title {
+  font-weight: bold;
+
+  margin: 5px 0 8px;
+
+  color: var(--primary);
+}
+
+.history-empty {
+  padding: 15px;
+
+  text-align: center;
+
+  color: var(--muted);
+}
+
+.challenge-history-row {
+  min-height: 58px;
+}
+
+.history-opponent {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  min-width: 0;
+}
+
+.history-result {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: var(--bg);
+}
+
+.history-score {
+  text-align: right;
+
+  flex-shrink: 0;
+}
+
+.history-score b {
+  display: block;
+
+  font-size: 16px;
+}
+
+.history-score span {
+  font-size: 11px;
+
+  font-weight: bold;
+}
+
+.win {
+  color: var(--green);
+}
+
+.lose {
+  color: var(--red);
+}
+
+.draw {
+  color: var(--orange);
+}
+
+
+/* =========================================================
+   MOBILE 1V1
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .players-versus {
+    gap: 7px;
+  }
+
+  .player-box {
+    padding: 10px 6px;
+  }
+
+  .player-avatar {
+    font-size: 24px;
+  }
+
+  .big-score {
+    font-size: 27px;
+  }
+
+  .vs {
+    font-size: 14px;
+  }
+
+  .stats-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .history-opponent {
+    max-width: 65%;
+  }
+}
